@@ -1,16 +1,28 @@
+import { useNavigate } from "react-router-dom";
 import TextInputForm from "./TextInputForm";
 import { useState } from "react";
 function TextInputFormContainer(){
     
     const [inputType,setInputType] = useState("password");
 // useState use 1st->state variable 2nd->state Updater function
+
+    const [value,setValue] = useState("");
+
+    const navigate = useNavigate();
+
     function handleFormSubmit(event){
         event.preventDefault();
-        console.log("Form Submitted");
+        console.log("Form Submitted",value);
+        if(value){
+            setTimeout(() => {
+                navigate('/play')
+            }, 5000);   //once submit form is click it is directed to play page after 5 sec
+        }
     }
     function handleTextInputChange(event){
         console.log("Text input changed");
         console.log(event.target.value);
+        setValue(event.target.value);
     }
 
     function handleShowHideClick(){
