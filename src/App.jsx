@@ -7,7 +7,7 @@ function App() {
       <Routes>
         <Route path='/start'  element={<StartGame/>} />
         <Route path='/play'  element={<PlayGame/>} />
-        <Route path='/'  element={<div>Home Page</div>} />
+        <Route path='/'  element={<><div>Home Page</div> <p>Try /start or /play on url</p> </>  } />
       </Routes>
   )
 }

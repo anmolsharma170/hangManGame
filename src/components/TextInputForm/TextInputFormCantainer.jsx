@@ -13,22 +13,25 @@ function TextInputFormContainer(){
     function handleFormSubmit(event){
         event.preventDefault();
         console.log("Form Submitted",value);
+        // if(value){
+        //     setTimeout(() => {
+        //         navigate('/play')
+        //     }, 5000);   //once submit form is click it is directed to play page after 5 sec
+        // }
         if(value){
-            setTimeout(() => {
-                navigate('/play')
-            }, 5000);   //once submit form is click it is directed to play page after 5 sec
+            navigate(`/play`,{state: {wordSelected: value}});
         }
     }
     function handleTextInputChange(event){
         console.log("Text input changed");
         console.log(event.target.value);
-        setValue(event.target.value);
+        setValue(event.target.value);  // as soon as user types anything in input field its value is set 
     }
 
     function handleShowHideClick(){
         console.log("Show/Hide button clicked");
         if(inputType=="password"){
-            setInputType("text");
+            setInputType("text"); 
         }
         else{
             setInputType("password");
