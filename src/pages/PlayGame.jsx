@@ -1,6 +1,6 @@
 import { Link, useLocation, useSearchParams } from "react-router-dom";
 import MaskedText from "../components/MaskedText/MaskedText";
-import LetterButttons from "../components/LetterButtons/LetterButtons";
+import LetterButtons from "../components/LetterButtons/LetterButtons";
 import { useState } from "react";
 import Hangman from "../components/HangMan/HangMan";
 function PlayGame(){
@@ -13,24 +13,30 @@ function PlayGame(){
     const [step,setStep]=useState(0);
     function handleLetterClick(letter){
         setGuessedLetters(previousLetters => {
-            if(state.wordSelected.toUpperCase().includes(letter)){
+            if(state?.wordSelected?.toUpperCase().includes(letter)){
                 console.log('Correct');
             }
             else{
                 console.log('Wrong');
                 setStep(step+1);
             }
-            setGuessedLetters([...guessedLetters,letter]);
+            return  ([...guessedLetters,letter]);
         });
-    }
+    } 
     return(
         <>
         <h1>Play Game</h1>
-        <MaskedText text={state.wordSelected} guessedLetters={guessedLetters}/>
+
+        {state?.wordSelected && (
+            <>
+                <MaskedText text={state.wordSelected} guessedLetters={guessedLetters}/>
         <div>
-            <LetterButttons text={state.wordSelected} guessedLetters={guessedLetters} onLetterClick={handleLetterClick}/>
+            <LetterButtons text={state.wordSelected} guessedLetters={guessedLetters} onLetterClick={handleLetterClick}/>
         </div>
         <div> <Hangman step={step}/> </div>
+            </>
+        )}
+        <Link to='/' className="text-blue-400">Home</Link>
         <Link to='/start' className="text-blue-400">Start game link</Link>
         </>
     )
